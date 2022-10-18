@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Todo.Models"
+             x:Class="Todo.Views.AllTodosPage"
+             Title="Para Fazer">
+    <ContentPage.BindingContext>
+        <models:AllTodos />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Novo" Clicked="New_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
+    </ContentPage.ToolbarItems>
+    
+    <CollectionView
+        x:Name="todosCollection"
+        ItemsSource="{Binding Todos}"
+        Margin="20"
+        SelectionMode="Single"
+        SelectionChanged="todosCollection_SelectionChanged"
+    >
+        <!--<CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+        </CollectionView.ItemsLayout>-->
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid ColumnDefinitions="*,*">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Title}" FontSize="22" />
+                        <Label Text="{Binding Date}" FontSize="20" TextColor="DimGray" />
+                    </VerticalStackLayout>
+
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding State}"
+                        FontSize="20"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="End"
+                    />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
